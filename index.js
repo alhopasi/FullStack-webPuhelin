@@ -6,6 +6,7 @@ const cors = require('cors')
 
 app.use(bodyParser.json())
 app.use(cors())
+app.use(express.static('build'))
 
 morgan.token('data', function (req, res) {
   return JSON.stringify(req.body)
@@ -89,7 +90,7 @@ app.post('/api/persons', (request, response) => {
   }
 
   persons.map(n => {
-    if (body.name == n.name) {
+    if (body.name === n.name) {
       return response.status(400).json({
         error: 'name must be unique'
       })
